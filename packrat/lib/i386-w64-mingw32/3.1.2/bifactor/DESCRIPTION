@@ -10,4 +10,4 @@ Description: Use this package to simulate and analize bifactor data. Select your
 Depends: mirt, mvtnorm
 License: GPL
 RoxygenNote: 5.0.1
-Built: R 3.1.2; ; 2016-02-09 22:05:01 UTC; windows
+Built: R 3.1.2; ; 2016-02-09 22:31:28 UTC; windows
