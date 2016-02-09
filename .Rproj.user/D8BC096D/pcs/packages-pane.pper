@@ -1,0 +1,7 @@
+{
+    "installOptions" : {
+        "installDependencies" : true,
+        "installFromRepository" : true,
+        "libraryPath" : "C:/Users/Ruben/Desktop/bifactor/packrat/lib/i386-w64-mingw32/3.1.2"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\n#' title: Square a number\n#' \n#' Takes in any numeric value and squares it\n#' @param N A number of observations per dataset to generate\n#' @param items A number of items per dataset to generate\n#' @param reps Number of replications\n#' @return Rturns Correlations between thetas, and RMSEA values for EAP scores\n#' @depends mirt, mvtnorm\n#' @imports mirt, mvtnorm\n#' @export \n\n#devtools::use_package(\"mirt\",\"mvtnorm\") # Defaults to imports\n\n\ngen<-function(N,items,reps){\n  factors<-3\n  items=items\n  for(i in 1:reps){\n    #set.seed(reps)\n    #Create the Variance Covariance Matrix for 6 items\n    sigma<-diag(factors)\n    \n    theta=as.matrix(mvtnorm::rmvnorm(n=N,mean=c(rep(1,factors)),sigma=sigma))\n    \n    \n    a1<-matrix(1.5,items)\n    a2<-matrix(c(rep(1.5,items/2),rep(NA,items/2)))\n    a3<-matrix(c(rep(NA,items/2),rep(1.5,items/2)))\n    a<-cbind(a1,a2,a3)\n    d<-matrix(rnorm(items))\n    data<-mirt::simdata(a,d,N,itemtype='dich',Theta=theta,sigma=sigma)\n    \n    mod1 <- mirt::bfactor(data, c(rep(1,items/2),rep(2,items/2)), itemtype='2PL')\n    coe<-coef(mod1)\n    scores<-mirt::fscores(mod1,full.scores=TRUE)\n    cor1<-cor(scores[,1],theta[,1])\n    cor2<-cor(scores[,2],theta[,2])\n    cor3<-cor(scores[,3],theta[,3])\n    cat('\\n')\n    cat(\"rep \", reps,'\\n')\n    cat(\"correlation 1 is \",cor1,'\\n')\n    cat(\"correlation 2 is \",cor2,'\\n')\n    cat(\"correlation 3 is \",cor3,'\\n')\t\n    \n    \n    #Calculate RMSE for one replication\n    cat(\"RMSE theta 1 \",mean((theta[,1]-scores[,1])^2),'\\n')\n    cat(\"RMSE theta 2 \",mean((theta[,2]-scores[,2])^2),'\\n')\n    cat(\"RMSE theta 3 \",mean((theta[,3]-scores[,3])^2),'\\n')\n    \n    \n  }\n  \n}",
+    "created" : 1454970627456.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1154397141",
+    "id" : "3768F4DC",
+    "lastKnownWriteTime" : 1455055494,
+    "last_content_update" : -2147483648,
+    "path" : "C:/Users/Ruben/Desktop/bifactor/R/bifactor.R",
+    "project_path" : "R/bifactor.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

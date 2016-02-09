@@ -7,5 +7,6 @@ Author: Ruben Castaneda
 Maintainer: Ruben Castaneda <rcastaneda2@ucmerced.edu>
 Description: Use this package to simulate and analize bifactor data. Select your
     conditions and number of iterations to run.
-License: 
+Depends:mirt, mvtnorm
+License: GPL
 RoxygenNote: 5.0.1
